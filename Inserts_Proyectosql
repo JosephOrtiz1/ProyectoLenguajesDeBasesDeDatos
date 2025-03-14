@@ -1,0 +1,465 @@
+--INSERTS DE LA TABLA USUARIOS
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (1, 'Juan Pérez', 'juan.perez@email.com', 'password123', TO_DATE('2025-03-01', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (2, 'Ana Gómez', 'ana.gomez@email.com', 'mypassword456', TO_DATE('2025-02-25', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (3, 'Carlos Sánchez', 'carlos.sanchez@email.com', 'securepass789', TO_DATE('2025-01-15', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (4, 'María López', 'maria.lopez@email.com', '12345qwert', TO_DATE('2024-12-20', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (5, 'Luis Martínez', 'luis.martinez@email.com', 'password789', TO_DATE('2025-03-02', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (6, 'Laura Fernández', 'laura.fernandez@email.com', '1234pass', TO_DATE('2025-02-28', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (7, 'Pedro Ruiz', 'pedro.ruiz@email.com', 'qwerty123', TO_DATE('2025-03-03', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (8, 'Sofía Ramírez', 'sofia.ramirez@email.com', 'password1', TO_DATE('2025-03-01', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (9, 'Miguel Gómez', 'miguel.gomez@email.com', '123qwerty', TO_DATE('2025-02-20', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (10, 'Patricia Hernández', 'patricia.hernandez@email.com', 'secure@2025', TO_DATE('2025-01-30', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (11, 'Ricardo Martínez', 'ricardo.martinez@email.com', 'abc123password', TO_DATE('2025-03-04', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (12, 'Lucía Sánchez', 'lucia.sanchez@email.com', 'admin2025', TO_DATE('2025-02-10', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (13, 'Antonio Díaz', 'antonio.diaz@email.com', 'mypassword!123', TO_DATE('2025-02-14', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (14, 'Rosa Morales', 'rosa.morales@email.com', 'password4567', TO_DATE('2025-03-05', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (15, 'Juanita Pérez', 'juanita.perez@email.com', 'juani1234', TO_DATE('2025-01-22', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (16, 'Héctor Torres', 'hector.torres@email.com', 'hector@2025', TO_DATE('2025-02-17', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (17, 'Esther López', 'esther.lopez@email.com', 'esther123', TO_DATE('2025-01-18', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (18, 'David González', 'david.gonzalez@email.com', 'dav123password', TO_DATE('2025-01-25', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (19, 'Nuria García', 'nuria.garcia@email.com', 'nuria2025', TO_DATE('2025-02-05', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (20, 'Juan Carlos Herrera', 'juancarlos.herrera@email.com', 'jc@2025', TO_DATE('2025-03-06', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (21, 'Antonio Romero', 'antonio.romero@email.com', 'romero2025', TO_DATE('2025-01-12', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (22, 'Daniela Ruiz', 'daniela.ruiz@email.com', 'dani1234', TO_DATE('2025-02-10', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (23, 'Luis García', 'luis.garcia@email.com', 'luis@321', TO_DATE('2025-01-16', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (24, 'Carmen López', 'carmen.lopez@email.com', 'carmen@2025', TO_DATE('2025-02-25', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (25, 'Francisco Martínez', 'francisco.martinez@email.com', 'fran1234', TO_DATE('2025-02-27', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (26, 'Lucía Pérez', 'lucia.perez@email.com', 'lucia2025@', TO_DATE('2025-01-28', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (27, 'Javier Ramírez', 'javier.ramirez@email.com', 'javi2025', TO_DATE('2025-01-31', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (28, 'Marta Sánchez', 'marta.sanchez@email.com', 'marta@2025', TO_DATE('2025-03-02', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (29, 'Alberto Fernández', 'alberto.fernandez@email.com', 'abc@2025', TO_DATE('2025-03-03', 'YYYY-MM-DD'));
+
+INSERT INTO Usuarios (id_usuario, nombre, email, contrasenna, fecha_registro) 
+VALUES (30, 'Raquel Ruiz', 'raquel.ruiz@email.com', 'raquel12345', TO_DATE('2025-02-15', 'YYYY-MM-DD'));
+
+------------------------------------------------------------------------------------------------------------------------
+--INSERT PARA TABLA DE TRANSACCIONES 
+
+INSERT INTO Transacciones (id_transaccion, id_usuario, id_categoria, monto, tipo, fecha, descripcion) 
+VALUES (1, 1, 1, 100.50, 'Pagado', TO_DATE('2025-03-01', 'YYYY-MM-DD'), 'Pago de servicios de electricidad');
+
+INSERT INTO Transacciones (id_transaccion, id_usuario, id_categoria, monto, tipo, fecha, descripcion) 
+VALUES (2, 2, 2, 250.75, 'Pendiente', TO_DATE('2025-02-25', 'YYYY-MM-DD'), 'Compra de materiales de oficina');
+
+INSERT INTO Transacciones (id_transaccion, id_usuario, id_categoria, monto, tipo, fecha, descripcion) 
+VALUES (3, 3, 3, 50.00, 'Pagado', TO_DATE('2025-01-15', 'YYYY-MM-DD'), 'Alquiler mensual de espacio de trabajo');
+
+INSERT INTO Transacciones (id_transaccion, id_usuario, id_categoria, monto, tipo, fecha, descripcion) 
+VALUES (4, 4, 4, 300.00, 'Pendiente', TO_DATE('2025-01-20', 'YYYY-MM-DD'), 'Pago de publicidad en redes sociales');
+
+INSERT INTO Transacciones (id_transaccion, id_usuario, id_categoria, monto, tipo, fecha, descripcion) 
+VALUES (5, 5, 5, 150.40, 'Pagado', TO_DATE('2025-02-10', 'YYYY-MM-DD'), 'Pago por consultoría empresarial');
+
+INSERT INTO Transacciones (id_transaccion, id_usuario, id_categoria, monto, tipo, fecha, descripcion) 
+VALUES (6, 6, 1, 500.00, 'Pendiente', TO_DATE('2025-02-28', 'YYYY-MM-DD'), 'Pago de servicios médicos');
+
+INSERT INTO Transacciones (id_transaccion, id_usuario, id_categoria, monto, tipo, fecha, descripcion) 
+VALUES (7, 7, 2, 120.00, 'Pagado', TO_DATE('2025-03-03', 'YYYY-MM-DD'), 'Compra de equipo de oficina');
+
+INSERT INTO Transacciones (id_transaccion, id_usuario, id_categoria, monto, tipo, fecha, descripcion) 
+VALUES (8, 8, 3, 180.25, 'Pendiente', TO_DATE('2025-03-01', 'YYYY-MM-DD'), 'Alquiler de oficina');
+
+INSERT INTO Transacciones (id_transaccion, id_usuario, id_categoria, monto, tipo, fecha, descripcion) 
+VALUES (9, 9, 4, 100.00, 'Pagado', TO_DATE('2025-02-20', 'YYYY-MM-DD'), 'Publicación en redes sociales');
+
+INSERT INTO Transacciones (id_transaccion, id_usuario, id_categoria, monto, tipo, fecha, descripcion) 
+VALUES (10, 10, 5, 220.50, 'Pendiente', TO_DATE('2025-01-30', 'YYYY-MM-DD'), 'Consultoría y asesoramiento empresarial');
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+--INSERT PARA TABLA DE CATEGORIAS
+
+INSERT INTO Categorias (id_categoria, nombre, tipo) 
+VALUES (1, 'Salario', 'ingreso');
+
+INSERT INTO Categorias (id_categoria, nombre, tipo) 
+VALUES (2, 'Venta de producto', 'ingreso');
+
+INSERT INTO Categorias (id_categoria, nombre, tipo) 
+VALUES (3, 'Consultoría', 'ingreso');
+
+INSERT INTO Categorias (id_categoria, nombre, tipo) 
+VALUES (4, 'Publicidad', 'egreso');
+
+INSERT INTO Categorias (id_categoria, nombre, tipo) 
+VALUES (5, 'Materiales', 'egreso');
+
+INSERT INTO Categorias (id_categoria, nombre, tipo) 
+VALUES (6, 'Servicios médicos', 'egreso');
+
+INSERT INTO Categorias (id_categoria, nombre, tipo) 
+VALUES (7, 'Renta de oficina', 'egreso');
+
+INSERT INTO Categorias (id_categoria, nombre, tipo) 
+VALUES (8, 'Comisión de ventas', 'ingreso');
+
+INSERT INTO Categorias (id_categoria, nombre, tipo) 
+VALUES (9, 'Gastos generales', 'egreso');
+
+INSERT INTO Categorias (id_categoria, nombre, tipo) 
+VALUES (10, 'Mantenimiento', 'ingreso');
+
+----------------------------------------------------------------------------------------------------------------------------
+--INSERT DE LA TABLA DE GRAFICOS
+
+INSERT INTO Graficos (id_grafico, id_reporte, tipo_grafico, datos_json) 
+VALUES (1, 1, 'Barras', NULL);
+
+INSERT INTO Graficos (id_grafico, id_reporte, tipo_grafico, datos_json) 
+VALUES (2, 2, 'Líneas', NULL);
+
+INSERT INTO Graficos (id_grafico, id_reporte, tipo_grafico, datos_json) 
+VALUES (3, 3, 'Pastel', NULL);
+
+INSERT INTO Graficos (id_grafico, id_reporte, tipo_grafico, datos_json) 
+VALUES (4, 4, 'Áreas', NULL);
+
+INSERT INTO Graficos (id_grafico, id_reporte, tipo_grafico, datos_json) 
+VALUES (5, 5, 'Radar', NULL);
+-----------------------------------------------------------------------------------------------------------------
+--INSERT DE LA TABLA DE REPORTES
+
+INSERT INTO Reportes (id_reporte, id_usuario, fecha_inicio, fecha_fin, generado_en, tipo_reporte) 
+VALUES (1, 1, TO_DATE('2025-02-01', 'YYYY-MM-DD'), TO_DATE('2025-02-28', 'YYYY-MM-DD'), TO_DATE('2025-03-01', 'YYYY-MM-DD'), 'Mensual');
+
+INSERT INTO Reportes (id_reporte, id_usuario, fecha_inicio, fecha_fin, generado_en, tipo_reporte) 
+VALUES (2, 2, TO_DATE('2025-03-01', 'YYYY-MM-DD'), TO_DATE('2025-03-07', 'YYYY-MM-DD'), TO_DATE('2025-03-08', 'YYYY-MM-DD'), 'Semanal');
+
+INSERT INTO Reportes (id_reporte, id_usuario, fecha_inicio, fecha_fin, generado_en, tipo_reporte) 
+VALUES (3, 3, TO_DATE('2025-01-01', 'YYYY-MM-DD'), TO_DATE('2025-01-31', 'YYYY-MM-DD'), TO_DATE('2025-02-01', 'YYYY-MM-DD'), 'Mensual');
+
+INSERT INTO Reportes (id_reporte, id_usuario, fecha_inicio, fecha_fin, generado_en, tipo_reporte) 
+VALUES (4, 4, TO_DATE('2025-02-10', 'YYYY-MM-DD'), TO_DATE('2025-02-16', 'YYYY-MM-DD'), TO_DATE('2025-02-17', 'YYYY-MM-DD'), 'Semanal');
+
+INSERT INTO Reportes (id_reporte, id_usuario, fecha_inicio, fecha_fin, generado_en, tipo_reporte) 
+VALUES (5, 5, TO_DATE('2025-02-01', 'YYYY-MM-DD'), TO_DATE('2025-02-15', 'YYYY-MM-DD'), TO_DATE('2025-02-16', 'YYYY-MM-DD'), 'Personalizado');
+
+INSERT INTO Reportes (id_reporte, id_usuario, fecha_inicio, fecha_fin, generado_en, tipo_reporte) 
+VALUES (6, 6, TO_DATE('2025-03-01', 'YYYY-MM-DD'), TO_DATE('2025-03-31', 'YYYY-MM-DD'), TO_DATE('2025-04-01', 'YYYY-MM-DD'), 'Mensual');
+
+INSERT INTO Reportes (id_reporte, id_usuario, fecha_inicio, fecha_fin, generado_en, tipo_reporte) 
+VALUES (7, 7, TO_DATE('2025-02-01', 'YYYY-MM-DD'), TO_DATE('2025-02-07', 'YYYY-MM-DD'), TO_DATE('2025-02-08', 'YYYY-MM-DD'), 'Semanal');
+
+INSERT INTO Reportes (id_reporte, id_usuario, fecha_inicio, fecha_fin, generado_en, tipo_reporte) 
+VALUES (8, 8, TO_DATE('2025-01-15', 'YYYY-MM-DD'), TO_DATE('2025-01-31', 'YYYY-MM-DD'), TO_DATE('2025-02-01', 'YYYY-MM-DD'), 'Mensual');
+
+INSERT INTO Reportes (id_reporte, id_usuario, fecha_inicio, fecha_fin, generado_en, tipo_reporte) 
+VALUES (9, 9, TO_DATE('2025-03-01', 'YYYY-MM-DD'), TO_DATE('2025-03-07', 'YYYY-MM-DD'), TO_DATE('2025-03-08', 'YYYY-MM-DD'), 'Semanal');
+
+INSERT INTO Reportes (id_reporte, id_usuario, fecha_inicio, fecha_fin, generado_en, tipo_reporte) 
+VALUES (10, 10, TO_DATE('2025-01-01', 'YYYY-MM-DD'), TO_DATE('2025-01-31', 'YYYY-MM-DD'), TO_DATE('2025-02-01', 'YYYY-MM-DD'), 'Mensual');
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+--INSERT DE TABLAS DE PRESUPUESTOS
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (1, 1, 1000.00, TO_DATE('2025-01-01', 'YYYY-MM-DD'), TO_DATE('2025-12-31', 'YYYY-MM-DD'), 'Presupuesto Anual', 'General');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (2, 2, 500.00, TO_DATE('2025-02-01', 'YYYY-MM-DD'), TO_DATE('2025-02-28', 'YYYY-MM-DD'), 'Presupuesto de Marketing', 'Marketing');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (3, 3, 2000.00, TO_DATE('2025-03-01', 'YYYY-MM-DD'), TO_DATE('2025-03-31', 'YYYY-MM-DD'), 'Presupuesto de Ventas', 'Ventas');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (4, 4, 1500.00, TO_DATE('2025-01-01', 'YYYY-MM-DD'), TO_DATE('2025-06-30', 'YYYY-MM-DD'), 'Presupuesto de Sueldos', 'Recursos Humanos');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (5, 5, 700.00, TO_DATE('2025-02-01', 'YYYY-MM-DD'), TO_DATE('2025-02-28', 'YYYY-MM-DD'), 'Presupuesto de Publicidad', 'Publicidad');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (6, 6, 2500.00, TO_DATE('2025-01-01', 'YYYY-MM-DD'), TO_DATE('2025-12-31', 'YYYY-MM-DD'), 'Presupuesto de Viajes', 'Viajes');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (7, 7, 800.00, TO_DATE('2025-04-01', 'YYYY-MM-DD'), TO_DATE('2025-04-30', 'YYYY-MM-DD'), 'Presupuesto de Capacitación', 'Capacitación');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (8, 8, 300.00, TO_DATE('2025-01-15', 'YYYY-MM-DD'), TO_DATE('2025-02-15', 'YYYY-MM-DD'), 'Presupuesto de Software', 'Tecnología');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (9, 9, 1200.00, TO_DATE('2025-03-01', 'YYYY-MM-DD'), TO_DATE('2025-03-31', 'YYYY-MM-DD'), 'Presupuesto de Investigación', 'Investigación');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (10, 10, 1000.00, TO_DATE('2025-04-01', 'YYYY-MM-DD'), TO_DATE('2025-06-30', 'YYYY-MM-DD'), 'Presupuesto de Desarrollo', 'Desarrollo');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (11, 11, 3000.00, TO_DATE('2025-01-01', 'YYYY-MM-DD'), TO_DATE('2025-12-31', 'YYYY-MM-DD'), 'Presupuesto Global', 'General');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (12, 12, 1500.00, TO_DATE('2025-05-01', 'YYYY-MM-DD'), TO_DATE('2025-05-31', 'YYYY-MM-DD'), 'Presupuesto de Eventos', 'Eventos');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (13, 13, 1000.00, TO_DATE('2025-06-01', 'YYYY-MM-DD'), TO_DATE('2025-06-30', 'YYYY-MM-DD'), 'Presupuesto de Investigación de Mercado', 'Investigación');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (14, 14, 500.00, TO_DATE('2025-02-01', 'YYYY-MM-DD'), TO_DATE('2025-02-28', 'YYYY-MM-DD'), 'Presupuesto de Marketing Digital', 'Marketing');
+
+INSERT INTO Presupuestos (id_presupuesto, id_usuario, monto_limite, Fecha_inicio, fecha_fin, nombre_presupuesto, tipo) 
+VALUES (15, 15, 2000.00, TO_DATE('2025-03-01', 'YYYY-MM-DD'), TO_DATE('2025-03-31', 'YYYY-MM-DD'), 'Presupuesto de Investigación y Desarrollo', 'Investigación');
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--INSERTS PARA TABLAS DE IMPUESTOS
+
+INSERT INTO Impuestos (id_impuesto, id_usuario, monto, fecha_registro, descripcion) 
+VALUES (1, 1, 150.75, TO_DATE('2025-02-01', 'YYYY-MM-DD'), 'Impuesto sobre la renta de enero 2025');
+
+INSERT INTO Impuestos (id_impuesto, id_usuario, monto, fecha_registro, descripcion) 
+VALUES (2, 2, 300.50, TO_DATE('2025-03-01', 'YYYY-MM-DD'), 'Impuesto sobre la propiedad de febrero 2025');
+
+INSERT INTO Impuestos (id_impuesto, id_usuario, monto, fecha_registro, descripcion) 
+VALUES (3, 3, 450.00, TO_DATE('2025-04-01', 'YYYY-MM-DD'), 'Impuesto sobre el consumo de marzo 2025');
+
+INSERT INTO Impuestos (id_impuesto, id_usuario, monto, fecha_registro, descripcion) 
+VALUES (4, 4, 120.00, TO_DATE('2025-05-01', 'YYYY-MM-DD'), 'Impuesto adicional por multas en mayo 2025');
+
+INSERT INTO Impuestos (id_impuesto, id_usuario, monto, fecha_registro, descripcion) 
+VALUES (5, 5, 250.00, TO_DATE('2025-06-01', 'YYYY-MM-DD'), 'Impuesto sobre vehículos de junio 2025');
+
+INSERT INTO Impuestos (id_impuesto, id_usuario, monto, fecha_registro, descripcion) 
+VALUES (6, 6, 175.40, TO_DATE('2025-07-01', 'YYYY-MM-DD'), 'Impuesto sobre la renta de julio 2025');
+
+INSERT INTO Impuestos (id_impuesto, id_usuario, monto, fecha_registro, descripcion) 
+VALUES (7, 7, 620.25, TO_DATE('2025-08-01', 'YYYY-MM-DD'), 'Impuesto de importación de agosto 2025');
+
+INSERT INTO Impuestos (id_impuesto, id_usuario, monto, fecha_registro, descripcion) 
+VALUES (8, 8, 90.00, TO_DATE('2025-09-01', 'YYYY-MM-DD'), 'Impuesto sobre ventas de septiembre 2025');
+
+INSERT INTO Impuestos (id_impuesto, id_usuario, monto, fecha_registro, descripcion) 
+VALUES (9, 9, 350.00, TO_DATE('2025-10-01', 'YYYY-MM-DD'), 'Impuesto por actividad empresarial en octubre 2025');
+
+INSERT INTO Impuestos (id_impuesto, id_usuario, monto, fecha_registro, descripcion) 
+VALUES (10, 10, 430.50, TO_DATE('2025-11-01', 'YYYY-MM-DD'), 'Impuesto sobre propiedad inmobiliaria noviembre 2025');
+
+------------------------------------------------------------------------------------------------------------------------------
+
+--INSERTS DE LA TABLA PAGOS RECURRENTES
+
+INSERT INTO PagosRecurrentes (id_pago, id_usuario, nombre_pago, monto, fecha_pago, estado)
+VALUES (1, 1, 'Pago mensual de suscripción de software de gestión', 120.00, TO_DATE('2025-03-01', 'YYYY-MM-DD'), 'Pendiente');
+
+INSERT INTO PagosRecurrentes (id_pago, id_usuario, nombre_pago, monto, fecha_pago, estado)
+VALUES (2, 2, 'Pago de servicio de hosting y dominio web', 50.00, TO_DATE('2025-03-05', 'YYYY-MM-DD'), 'Pagado');
+
+INSERT INTO PagosRecurrentes (id_pago, id_usuario, nombre_pago, monto, fecha_pago, estado)
+VALUES (3, 3, 'Pago de membresía para promoción en redes sociales', 200.00, TO_DATE('2025-03-10', 'YYYY-MM-DD'), 'Pendiente');
+
+INSERT INTO PagosRecurrentes (id_pago, id_usuario, nombre_pago, monto, fecha_pago, estado)
+VALUES (4, 4, 'Pago de herramientas de marketing por correo electrónico', 35.00, TO_DATE('2025-03-15', 'YYYY-MM-DD'), 'Pagado');
+
+INSERT INTO PagosRecurrentes (id_pago, id_usuario, nombre_pago, monto, fecha_pago, estado)
+VALUES (5, 5, 'Pago mensual de renta del espacio de oficina', 800.00, TO_DATE('2025-03-20', 'YYYY-MM-DD'), 'Pendiente');
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+--INSERT PARA LA TABLA DE CLIENTES
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (1, 'Carlos Pérez', 'carlos.perez@email.com', 5550123456);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (2, 'Ana Martínez', 'ana.martinez@email.com', 5550234567);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (3, 'Luis Gómez', 'luis.gomez@email.com', 5550345678);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (4, 'María López', 'maria.lopez@email.com', 5550456789);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (5, 'José Rodríguez', 'jose.rodriguez@email.com', 5550567890);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (6, 'Laura García', 'laura.garcia@email.com', 5550678901);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (7, 'Francisco Sánchez', 'francisco.sanchez@email.com', 5550789012);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (8, 'Elena Díaz', 'elena.diaz@email.com', 5550890123);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (9, 'Pedro Martínez', 'pedro.martinez@email.com', 5550912345);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (10, 'Carmen Ruiz', 'carmen.ruiz@email.com', 5551023456);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (11, 'David Fernández', 'david.fernandez@email.com', 5551134567);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (12, 'Sara González', 'sara.gonzalez@email.com', 5551245678);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (13, 'Raúl Pérez', 'raul.perez@email.com', 5551356789);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (14, 'Marta García', 'marta.garcia@email.com', 5551467890);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (15, 'Antonio Rodríguez', 'antonio.rodriguez@email.com', 5551578901);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (16, 'Inés Sánchez', 'ines.sanchez@email.com', 5551689012);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (17, 'Rafael López', 'rafael.lopez@email.com', 5551790123);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (18, 'Patricia Martínez', 'patricia.martinez@email.com', 5551801234);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (19, 'Tomás Fernández', 'tomas.fernandez@email.com', 5551912345);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (20, 'Raquel García', 'raquel.garcia@email.com', 5552023456);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (21, 'Adrián Gómez', 'adrian.gomez@email.com', 5552134567);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (22, 'Lorena Díaz', 'lorena.diaz@email.com', 5552245678);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (23, 'Héctor López', 'hector.lopez@email.com', 5552356789);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (24, 'Raquel Rodríguez', 'raquel.rodriguez@email.com', 5552467890);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (25, 'Óscar Sánchez', 'oscar.sanchez@email.com', 5552578901);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (26, 'Lidia Fernández', 'lidia.fernandez@email.com', 5552689012);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (27, 'Pedro González', 'pedro.gonzalez@email.com', 5552790123);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (28, 'Julia Pérez', 'julia.perez@email.com', 5552801234);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (29, 'Javier Ruiz', 'javier.ruiz@email.com', 5552912345);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (30, 'Beatriz Martínez', 'beatriz.martinez@email.com', 5553023456);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (31, 'Victor Sánchez', 'victor.sanchez@email.com', 5553134567);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (32, 'Valeria Gómez', 'valeria.gomez@email.com', 5553245678);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (33, 'Carlos Fernández', 'carlos.fernandez@email.com', 5553356789);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (34, 'Cristina Díaz', 'cristina.diaz@email.com', 5553467890);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (35, 'Juan González', 'juan.gonzalez@email.com', 5553578901);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (36, 'Mónica Pérez', 'monica.perez@email.com', 5553689012);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (37, 'Esteban Ruiz', 'esteban.ruiz@email.com', 5553790123);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (38, 'Sandra Sánchez', 'sandra.sanchez@email.com', 5553801234);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (39, 'Antonio González', 'antonio.gonzalez@email.com', 5553912345);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (40, 'Paula Gómez', 'paula.gomez@email.com', 5554023456);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (41, 'Fernando Díaz', 'fernando.diaz@email.com', 5554134567);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (42, 'Natalia Rodríguez', 'natalia.rodriguez@email.com', 5554245678);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (43, 'Sergio Pérez', 'sergio.perez@email.com', 5554356789);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (44, 'Eva Fernández', 'eva.fernandez@email.com', 5554467890);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (45, 'Martín Sánchez', 'martin.sanchez@email.com', 5554578901);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (46, 'Patricia López', 'patricia.lopez@email.com', 5554689012);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (47, 'Ángel Gómez', 'angel.gomez@email.com', 5554790123);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (48, 'Marina Díaz', 'marina.diaz@email.com', 5554801234);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (49, 'Juan Carlos Ruiz', 'juancarlos.ruiz@email.com', 5554912345);
+
+INSERT INTO Clientes (id_cliente, nombre_cliente, email_cliente, numero_cliente)
+VALUES (50, 'Carmen Fernández', 'carmen.fernandez@email.com', 5555023456);
+
