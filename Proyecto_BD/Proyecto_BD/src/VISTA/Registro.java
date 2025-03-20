@@ -4,7 +4,10 @@
  */
 package VISTA;
 
+import CRUD.Usuarios;
+import com.sun.jdi.connect.spi.Connection;
 import javax.swing.JOptionPane;
+import proyecto_bd.OracleConnection;
 
 /**
  *
@@ -31,8 +34,8 @@ public class Registro extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
-        txtCorreo = new javax.swing.JTextField();
+        txtFechaReg = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         btnRegistro = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -49,9 +52,9 @@ public class Registro extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Registro");
 
-        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreoActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
 
@@ -61,6 +64,9 @@ public class Registro extends javax.swing.JFrame {
             }
         });
 
+        btnRegistro.setBackground(new java.awt.Color(0, 102, 102));
+        btnRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRegistro.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistro.setText("Registrarse");
         btnRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,9 +78,9 @@ public class Registro extends javax.swing.JFrame {
 
         jLabel3.setText("Contraseña");
 
-        jLabel4.setText("Telefono");
+        jLabel4.setText("Fecha Registro");
 
-        jLabel5.setText("Correo");
+        jLabel5.setText("Email");
 
         jLabel6.setText("Nombre");
 
@@ -87,14 +93,14 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtFechaReg, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtContra, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
                 .addGap(57, 57, 57))
@@ -103,7 +109,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegistro)
                     .addComponent(jLabel1))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,11 +126,11 @@ public class Registro extends javax.swing.JFrame {
                     .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -149,29 +155,50 @@ public class Registro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorreoActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        String usuario = txtUsuario.getText();
-        String contra = new String(txtContra.getPassword());
-        String telefono = txtTelefono.getText();
-        String correo = txtCorreo.getText();
-        String nombre = txtNombre.getText();
+        try {
+        // Obtener los valores de los campos de texto
+        int idUsuario = Integer.parseInt(txtUsuario.getText()); 
+        String nombre = txtNombre.getText(); 
+        String email = txtEmail.getText();  
+        String contrasenna = new String(txtContra.getPassword());  
+        String fechaTexto = txtFechaReg.getText(); // Se asume formato "YYYY-MM-DD"
 
-        if (!usuario.isEmpty() && !contra.isEmpty() && !telefono.isEmpty() && !correo.isEmpty() && !nombre.isEmpty()) {
-            //InicioSesion.usuarios.put(usuario, contra); // Guardar usuario
-            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente");
-            new InicioSesion().setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        // Convertir la fecha de String a java.sql.Date
+            java.sql.Date fechaReg = java.sql.Date.valueOf(fechaTexto);
+            
+        // Crear una nueva conexión con Oracle
+        OracleConnection oracleConn = new OracleConnection();
+        Connection conn = (Connection) oracleConn.getConnection();
+
+        // Verificar si la conexión no es nula
+        if (conn == null) {
+            JOptionPane.showMessageDialog(this, "Error: No se pudo conectar a la base de datos.");
+            return;
         }
+
+        // Instancia de la clase Usuarios
+        Usuarios usuarios = new Usuarios((java.sql.Connection) conn);
+
+        // Llamar al método para crear el usuario
+        usuarios.crearUsuario(idUsuario, nombre, email, contrasenna, fechaReg);
+
+        // Mostrar mensaje de éxito
+        JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.");
+        
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Error: Verifica que los campos estén correctamente llenados.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     /**
@@ -219,9 +246,9 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txtContra;
-    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtFechaReg;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

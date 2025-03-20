@@ -4,6 +4,8 @@
  */
 package CRUD;
 import java.sql.*;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -103,6 +105,29 @@ public class Clientes {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+}
+    
+    //obtener cliente.
+    // Modificado
+public void obtenerCliente(DefaultTableModel model) {
+    String sql = "SELECT * FROM Clientes";
+    model.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
+
+    try (Statement stmt = connection.createStatement();
+         ResultSet rs = stmt.executeQuery(sql)) {
+        
+        while (rs.next()) {
+            int idCliente = rs.getInt("id_cliente");
+            String nombreCliente = rs.getString("nombre_cliente");
+            String email = rs.getString("email_cliente");
+            int numeroCliente = rs.getInt("numero_cliente");
+
+            // Agregar fila con los datos obtenidos
+            model.addRow(new Object[]{idCliente, nombreCliente, email, numeroCliente});
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
 }
      
 }
