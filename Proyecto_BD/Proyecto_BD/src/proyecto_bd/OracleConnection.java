@@ -19,32 +19,35 @@ public class OracleConnection {
         conectar();
     }
     
-    private void conectar() {
+     public static Connection conectar() {
         try {
-            Class.forName("oracle.jdbc.OracleDriver"); // Driver 
-            url = "jdbc:oracle:thin:@192.168.56.105:1521:orcl";
-            user = "AdminProyecto";
-            pass = "12345678";
-            conn = DriverManager.getConnection(url, user, pass);
+            Class.forName("oracle.jdbc.OracleDriver");  // Cargar el driver
+            String url = "jdbc:oracle:thin:@192.168.56.105:1521:orcl";
+            String user = "AdminProyecto";
+            String pass = "12345678";
+            Connection conn = DriverManager.getConnection(url, user, pass);
             System.out.println("Conectado!");
+            return conn;
         } catch (Exception e) {
-            System.out.println("Error, no se pudo conectar: " + e.getMessage());
+            System.out.println("Error al conectar: " + e.getMessage());
+            return null;  // Si la conexión falla, retorna null
         }
     }
     
     public void desconectar() {
-        try {
-            if (conn != null && !conn.isClosed()) { 
+         try {
+            if (conn != null && !conn.isClosed()) {
                 conn.close();
                 System.out.println("Desconectado!");
             }
-        } catch (SQLException e) { // Captura SQLException en vez de Exception
+        } catch (SQLException e) {
             System.out.println("Error, no se pudo desconectar: " + e.getMessage());
         }
+    
     }
 
     public Connection getConnection() {
-       // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    return conn;
+       return conn;
     }
 }
+ 

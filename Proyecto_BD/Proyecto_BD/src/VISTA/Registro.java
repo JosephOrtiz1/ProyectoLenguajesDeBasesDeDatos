@@ -4,10 +4,19 @@
  */
 package VISTA;
 
-import CRUD.Usuarios;
 import com.sun.jdi.connect.spi.Connection;
+import proyecto_bd.OracleConnection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import proyecto_bd.OracleConnection;
+
 
 /**
  *
@@ -33,16 +42,14 @@ public class Registro extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         txtFechaReg = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
         btnRegistro = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txtContra = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,15 +59,15 @@ public class Registro extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Registro");
 
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
-
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
+            }
+        });
+
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
             }
         });
 
@@ -74,15 +81,13 @@ public class Registro extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Usuario");
+        jLabel2.setText("Nombre");
 
         jLabel3.setText("Contraseña");
 
         jLabel4.setText("Fecha Registro");
 
         jLabel5.setText("Email");
-
-        jLabel6.setText("Nombre");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,22 +99,23 @@ public class Registro extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtFechaReg, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtContra, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
                 .addGap(57, 57, 57))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(153, 153, 153)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRegistro)
-                    .addComponent(jLabel1))
-                .addContainerGap(154, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(btnRegistro)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +124,7 @@ public class Registro extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -132,13 +138,9 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(btnRegistro)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(49, 49, 49))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,47 +161,62 @@ public class Registro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+ 
         try {
         // Obtener los valores de los campos de texto
-        int idUsuario = Integer.parseInt(txtUsuario.getText()); 
-        String nombre = txtNombre.getText(); 
-        String email = txtEmail.getText();  
-        String contrasenna = new String(txtContra.getPassword());  
-        String fechaTexto = txtFechaReg.getText(); // Se asume formato "YYYY-MM-DD"
+        String nombre = txtNombre.getText();
+        String email = txtEmail.getText();
+        String contrasenna = new String(txtContra.getPassword());
+        String fechaTexto = txtFechaReg.getText(); // Ejemplo: "31-JAN-24"
 
-        // Convertir la fecha de String a java.sql.Date
-            java.sql.Date fechaReg = java.sql.Date.valueOf(fechaTexto);
-            
-        // Crear una nueva conexión con Oracle
-        OracleConnection oracleConn = new OracleConnection();
-        Connection conn = (Connection) oracleConn.getConnection();
+        // Validar el formato de la fecha con una expresión regular
+        if (!fechaTexto.matches("\\d{2}-[a-zA-Z]{3}-\\d{2}")) {
+            JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto. Usa DD-MMM-YY (Ej: 31-JAN-24)");
+            return;
+        }
 
-        // Verificar si la conexión no es nula
+        // Convertir la fecha de texto a java.sql.Date
+        SimpleDateFormat formatoOracle = new SimpleDateFormat("dd-MMM-yy", Locale.ENGLISH);
+        Date fechaUtil = formatoOracle.parse(fechaTexto);
+        java.sql.Date fechaRegistro = new java.sql.Date(fechaUtil.getTime());
+
+        // Obtener conexión válida desde OracleConnection
+        java.sql.Connection conn = proyecto_bd.OracleConnection.conectar();
+
         if (conn == null) {
             JOptionPane.showMessageDialog(this, "Error: No se pudo conectar a la base de datos.");
             return;
         }
 
-        // Instancia de la clase Usuarios
-        Usuarios usuarios = new Usuarios((java.sql.Connection) conn);
+        // Consulta sin id_usuario (se autogenera)
+        String sql = "INSERT INTO usuarios (nombre, email, contrasenna, fecha_registro) VALUES (?, ?, ?, ?)";
 
-        // Llamar al método para crear el usuario
-        usuarios.crearUsuario(idUsuario, nombre, email, contrasenna, fechaReg);
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            ps.setString(2, email);
+            ps.setString(3, contrasenna);
+            ps.setDate(4, fechaRegistro);
 
-        // Mostrar mensaje de éxito
-        JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.");
-        
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Error: Verifica que los campos estén correctamente llenados.");
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.");
+        }
+
+        // Cerrar conexión después de registrar
+        conn.close();
+
+    } catch (java.text.ParseException e) {
+        JOptionPane.showMessageDialog(this, "Error al convertir la fecha: " + e.getMessage());
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al registrar usuario: " + e.getMessage());
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
     }
     }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,12 +260,10 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField txtContra;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFechaReg;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

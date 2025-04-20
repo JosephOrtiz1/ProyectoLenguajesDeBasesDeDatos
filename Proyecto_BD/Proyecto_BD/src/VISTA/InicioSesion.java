@@ -4,7 +4,15 @@
  */
 package VISTA;
 
+import proyecto_bd.OracleConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
+
+
 
 /**
  *
@@ -33,7 +41,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         btnValidar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnRegistrarse = new javax.swing.JButton();
         txtContra = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,10 +73,15 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 102, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Registrarse");
+        btnRegistrarse.setBackground(new java.awt.Color(0, 102, 102));
+        btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRegistrarse.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarse.setText("Registrarse");
+        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,7 +100,7 @@ public class InicioSesion extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUsuario)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnRegistrarse, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtContra, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(146, 146, 146)
@@ -109,7 +122,7 @@ public class InicioSesion extends javax.swing.JFrame {
                     .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(btnRegistrarse)
                     .addComponent(btnValidar))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
@@ -135,17 +148,53 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        String usuario = txtUsuario.getText();
-        String contra = new String(txtContra.getPassword());
+                                              
+       String usuario = txtUsuario.getText();
+    String contra = new String(txtContra.getPassword());
 
-        if (usuario.equals("admin") && contra.equals("1234")) {
-            JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso");
-            new Menu().setVisible(true); // Abre otro JFrame
-            this.dispose(); // Cierra la ventana de login
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+    // Usamos el método estático para obtener la conexión
+    Connection con = (Connection) OracleConnection.conectar();
+
+    if (con != null) {  // Verifica que la conexión sea válida
+         try (PreparedStatement ps = con.prepareStatement(
+                "SELECT * FROM usuarios WHERE nombre = ? AND contrasenna = ?")) {
+
+            ps.setString(1, usuario);
+            ps.setString(2, contra);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso");
+                new Menu().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            // No olvides cerrar la conexión
+            OracleConnection conection = new OracleConnection();
+            conection.desconectar(); // Desconectar la conexión al final
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "No se pudo conectar a la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+
+        
     }//GEN-LAST:event_btnValidarActionPerformed
+
+    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
+                                                   
+    Registro registro = new Registro(); 
+    registro.setVisible(true);         
+    this.dispose();                    
+
+
+    }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,8 +232,8 @@ public class InicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegistrarse;
     private javax.swing.JButton btnValidar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
