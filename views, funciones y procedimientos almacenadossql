@@ -705,3 +705,183 @@ EXCEPTION
 END;
 /
 
+
+
+
+
+
+
+-- Vista para transacciones por usuario y mes
+CREATE VIEW VistaTransaccionesUsuario AS
+SELECT t.idUsuario, 
+       MONTH(t.fechaTransaccion) AS mes, 
+       SUM(t.monto) AS totalTransacciones
+FROM Transacciones t
+GROUP BY t.idUsuario, MONTH(t.fechaTransaccion);
+
+
+-- Función para calcular el saldo total por usuario
+CREATE FUNCTION fn_calcularSaldoTotal(idUsuario INT)
+RETURNS DECIMAL(15,2)
+BEGIN
+    DECLARE saldoTotal DECIMAL(15,2);
+    SELECT SUM(saldo) INTO saldoTotal
+    FROM CuentasBancarias
+    WHERE idUsuario = idUsuario;
+    RETURN saldoTotal;
+END;
+
+-- Procedimiento almacenado para agregar una transacción
+CREATE PROCEDURE sp_agregarTransaccion(
+    IN p_idUsuario INT,
+    IN p_monto DECIMAL(15, 2),
+    IN p_descripcion VARCHAR(255),
+    IN p_tipoTransaccion VARCHAR(50)
+)
+BEGIN
+    INSERT INTO Transacciones(idUsuario, monto, descripcion, tipoTransaccion, fechaTransaccion)
+    VALUES (p_idUsuario, p_monto, p_descripcion, p_tipoTransaccion, NOW());
+    
+    -- Actualiza el saldo de la cuenta bancaria correspondiente
+    UPDATE CuentasBancarias
+    SET saldo = saldo + p_monto
+    WHERE idUsuario = p_idUsuario;
+    
+    -- Auditoría de la transacción
+    INSERT INTO AuditoriaTransacciones(idTransaccion, accion, usuarioAccion)
+    VALUES (LAST_INSERT_ID(), 'Insert', 'Sistema');
+END;
+
+
+-- Procedimiento para transferir dinero entre cuentas bancarias
+CREATE PROCEDURE sp_transferirDinero(
+    IN p_idUsuario INT,
+    IN p_idCuentaOrigen INT,
+    IN p_idCuentaDestino INT,
+    IN p_monto DECIMAL(15,2),
+    IN p_descripcion VARCHAR(255)
+)
+BEGIN
+    DECLARE saldoOrigen DECIMAL(15,2);
+    DECLARE saldoDestino DECIMAL(15,2);
+    
+    -- Obtener saldos de las cuentas
+    SELECT saldo INTO saldoOrigen FROM CuentasBancarias WHERE idCuenta = p_idCuentaOrigen;
+    SELECT saldo INTO saldoDestino FROM CuentasBancarias WHERE idCuenta = p_idCuentaDestino;
+    
+    -- Verificar si el saldo es suficiente para la transferencia
+    IF saldoOrigen >= p_monto THEN
+        -- Actualizar el saldo de las cuentas
+        UPDATE CuentasBancarias
+        SET saldo = saldoOrigen - p_monto
+        WHERE idCuenta = p_idCuentaOrigen;
+        
+        UPDATE CuentasBancarias
+        SET saldo = saldoDestino + p_monto
+        WHERE idCuenta = p_idCuentaDestino;
+        
+        -- Registrar la transacción de la transferencia
+        INSERT INTO Transacciones(idUsuario, monto, descripcion, tipoTransaccion, fechaTransaccion)
+        VALUES (p_idUsuario, p_monto, CONCAT('Transferencia: ', p_descripcion), 'Transferencia', NOW());
+        
+        -- Auditoría de la transferencia
+        INSERT INTO AuditoriaTransacciones(idTransaccion, accion, usuarioAccion)
+        VALUES (LAST_INSERT_ID(), 'Insert', 'Sistema');
+    ELSE
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Saldo insuficiente para realizar la transferencia';
+    END IF;
+END;
+
+
+-- Procedimiento para obtener un reporte de transacciones por fecha y tipo
+CREATE PROCEDURE sp_reporteTransaccionesPorFechaTipo(
+    IN p_idUsuario INT,
+    IN p_fechaInicio DATE,
+    IN p_fechaFin DATE,
+    IN p_tipoTransaccion VARCHAR(50)
+)
+BEGIN
+    SELECT t.idTransaccion, t.monto, t.descripcion, t.tipoTransaccion, t.fechaTransaccion
+    FROM Transacciones t
+    WHERE t.idUsuario = p_idUsuario
+      AND t.fechaTransaccion BETWEEN p_fechaInicio AND p_fechaFin
+      AND t.tipoTransaccion = p_tipoTransaccion;
+END;
+
+
+-- Trigger para actualizar la auditoría cada vez que se actualiza una transacción
+CREATE TRIGGER tr_actualizarAuditoriaTransaccion
+AFTER UPDATE ON Transacciones
+FOR EACH ROW
+BEGIN
+    INSERT INTO AuditoriaTransacciones(idTransaccion, accion, usuarioAccion)
+    VALUES (NEW.idTransaccion, 'Update', 'Sistema');
+END;
+
+
+-- Trigger para actualizar el saldo de la cuenta cuando se elimina una transacción
+CREATE TRIGGER tr_actualizarSaldoEliminacionTransaccion
+AFTER DELETE ON Transacciones
+FOR EACH ROW
+BEGIN
+    UPDATE CuentasBancarias
+    SET saldo = saldo - OLD.monto
+    WHERE idCuenta = OLD.idCuenta;
+
+    -- Registrar auditoría de la eliminación de la transacción
+    INSERT INTO AuditoriaTransacciones(idTransaccion, accion, usuarioAccion)
+    VALUES (OLD.idTransaccion, 'Delete', 'Sistema');
+END;
+
+-- Trigger para auditar las actualizaciones en las cuentas bancarias
+CREATE TRIGGER tr_auditarModificacionCuenta
+AFTER UPDATE ON CuentasBancarias
+FOR EACH ROW
+BEGIN
+    -- Solo auditar si el saldo ha cambiado
+    IF OLD.saldo != NEW.saldo THEN
+        INSERT INTO AuditoriaTransacciones(idTransaccion, accion, usuarioAccion)
+        VALUES (LAST_INSERT_ID(), 'Update', 'Sistema');
+    END IF;
+END;
+
+
+-- Trigger para verificar que no se realicen transacciones con saldo insuficiente
+CREATE TRIGGER tr_verificarSaldoMinimo
+BEFORE INSERT ON Transacciones
+FOR EACH ROW
+BEGIN
+    DECLARE saldoActual DECIMAL(15,2);
+    
+    -- Obtener el saldo actual de la cuenta
+    SELECT saldo INTO saldoActual
+    FROM CuentasBancarias
+    WHERE idCuenta = NEW.idCuenta;
+    
+    -- Verificar que haya suficiente saldo
+    IF saldoActual - NEW.monto < 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Saldo insuficiente para realizar la transacción';
+    END IF;
+END;
+
+
+--Secuencia para registrar usuarios y que su ID vaya incrementando
+
+CREATE SEQUENCE seq_usuario_id
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE
+;
+
+
+--Trigger para darle un id al usuario
+
+CREATE OR REPLACE TRIGGER trg_before_insert_usuario
+BEFORE INSERT ON usuarios
+FOR EACH ROW
+BEGIN
+    IF :NEW.id_usuario is NULL THEN
+        SELECT seq_usuario_id.NEXTVAL INT :NEW.id_usuario FROM DUAL;
+    END IF;
+END;
