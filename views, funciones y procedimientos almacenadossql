@@ -409,6 +409,89 @@ END;
 
 -- PROCEDIMIENTOS ALMACENADOS
 
+/*Procedimiento almacenado para insertar el nombre del usuario y la categoria en vez de
+la id del usuario y de la categoria
+*/
+
+CREATE OR REPLACE PROCEDURE insertar_transaccion(
+    p_id_transaccion IN NUMBER,
+    p_nombre_usuario IN VARCHAR2,
+    p_nombre_categoria IN VARCHAR2,
+    p_monto IN NUMBER,
+    p_tipo IN VARCHAR2,
+    p_fecha IN DATE,
+    p_descripcion IN VARCHAR2
+) AS
+    v_id_usuario NUMBER;
+    v_id_categoria NUMBER;
+BEGIN
+    -- Obtener el ID del usuario a partir del nombre
+    SELECT ID_USUARIO INTO v_id_usuario 
+    FROM USUARIOS 
+    WHERE NOMBRE = p_nombre_usuario;
+
+    -- Obtener el ID de la categoría a partir del nombre
+    SELECT ID_CATEGORIA INTO v_id_categoria 
+    FROM CATEGORIAS 
+    WHERE NOMBRE = p_nombre_categoria;
+
+    -- Insertar la transacción con los IDs obtenidos
+    INSERT INTO TRANSACCIONES (ID_TRANSACCION, ID_USUARIO, ID_CATEGORIA, MONTO, TIPO, FECHA, DESCRIPCION)
+    VALUES (p_id_transaccion, v_id_usuario, v_id_categoria, p_monto, p_tipo, p_fecha, p_descripcion);
+
+    COMMIT;
+END;
+/
+
+--Insertar una transaccion
+CREATE OR REPLACE PROCEDURE insertar_transaccion(
+    p_id_transaccion IN NUMBER,
+    p_nombre_usuario IN VARCHAR2,
+    p_nombre_categoria IN VARCHAR2,
+    p_monto IN NUMBER,
+    p_tipo IN VARCHAR2,
+    p_fecha IN DATE,
+    p_descripcion IN VARCHAR2
+) AS
+    v_id_usuario NUMBER;
+    v_id_categoria NUMBER;
+BEGIN
+    SELECT ID_USUARIO INTO v_id_usuario 
+    FROM USUARIOS 
+    WHERE NOMBRE = p_nombre_usuario;
+
+    SELECT ID_CATEGORIA INTO v_id_categoria 
+    FROM CATEGORIAS 
+    WHERE NOMBRE = p_nombre_categoria;
+
+    INSERT INTO TRANSACCIONES (ID_TRANSACCION, ID_USUARIO, ID_CATEGORIA, MONTO, TIPO, FECHA, DESCRIPCION)
+    VALUES (p_id_transaccion, v_id_usuario, v_id_categoria, p_monto, p_tipo, p_fecha, p_descripcion);
+
+    COMMIT;
+END;
+/
+--Actualizar un pago
+
+CREATE OR REPLACE PROCEDURE actualizar_pago(
+    p_idPago IN NUMBER,
+    p_idUsuario IN NUMBER,
+    p_nombrePago IN VARCHAR2,
+    p_monto IN NUMBER,
+    p_fechaPago IN DATE,
+    p_estado IN VARCHAR2
+) AS
+BEGIN
+    UPDATE PAGOSRECURRENTES
+    SET id_usuario = p_idUsuario,
+        nombre_pago = p_nombrePago,
+        monto = p_monto,
+        fecha_pago = p_fechaPago,
+        estado = p_estado
+    WHERE id_pago = p_idPago;
+
+    COMMIT;
+END actualizar_pago;
+/
 
 
 -- Registrar Gasto con validaciones
@@ -882,6 +965,6 @@ BEFORE INSERT ON usuarios
 FOR EACH ROW
 BEGIN
     IF :NEW.id_usuario is NULL THEN
-        SELECT seq_usuario_id.NEXTVAL INT :NEW.id_usuario FROM DUAL;
+        SELECT seq_usuario_id.NEXTVAL INTO :NEW.id_usuario FROM DUAL;
     END IF;
 END;

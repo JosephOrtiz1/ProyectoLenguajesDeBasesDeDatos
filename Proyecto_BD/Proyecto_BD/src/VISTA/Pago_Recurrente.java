@@ -6,8 +6,11 @@ package VISTA;
 
 import CRUD.PagosRecurrentes;
 import com.sun.jdi.connect.spi.Connection;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import proyecto_bd.OracleConnection;
+import java.sql.CallableStatement;
+
 
 /**
  *
@@ -35,7 +38,7 @@ public class Pago_Recurrente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtIdUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtNomPago = new javax.swing.JTextField();
+        txtNombrePago = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtMonto = new javax.swing.JTextField();
         txtFPago = new javax.swing.JTextField();
@@ -47,6 +50,7 @@ public class Pago_Recurrente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtIdPRecurrente = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
+        btnVolverMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,24 +97,39 @@ public class Pago_Recurrente extends javax.swing.JFrame {
             }
         });
 
+        btnVolverMenu.setBackground(new java.awt.Color(0, 102, 102));
+        btnVolverMenu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnVolverMenu.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolverMenu.setText("Volver");
+        btnVolverMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(jLabel7)
+                        .addGap(56, 56, 56)
+                        .addComponent(txtIdPRecurrente, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(209, 209, 209)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnActualizar)
+                            .addComponent(jLabel1))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(208, 208, 208)
                 .addComponent(btnEliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnActualizar))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(117, 117, 117))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(txtIdPRecurrente, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+                .addComponent(btnVolverMenu)
+                .addGap(72, 72, 72))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(76, 76, 76)
@@ -121,26 +140,33 @@ public class Pago_Recurrente extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addComponent(jLabel5))
                     .addGap(79, 79, 79)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtFPago, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNomPago, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(76, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtIdUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                        .addComponent(txtNombrePago)
+                        .addComponent(txtMonto)
+                        .addComponent(txtFPago)
+                        .addComponent(txtEstado))
+                    .addContainerGap(192, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addComponent(btnActualizar)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdPRecurrente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActualizar)
-                    .addComponent(btnEliminar)))
+                    .addComponent(jLabel7)
+                    .addComponent(txtIdPRecurrente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnEliminar)
+                        .addGap(55, 55, 55))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnVolverMenu)
+                        .addGap(44, 44, 44))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(70, 70, 70)
@@ -149,7 +175,7 @@ public class Pago_Recurrente extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtNomPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombrePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -163,7 +189,7 @@ public class Pago_Recurrente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6))
-                    .addContainerGap(70, Short.MAX_VALUE)))
+                    .addContainerGap(152, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,23 +200,25 @@ public class Pago_Recurrente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtMontoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+
         try {
             // Obtener valores de los campos de texto
-            int idPago = Integer.parseInt(txtNomPago.getText());
+            int idPago = Integer.parseInt(txtNombrePago.getText());
             int idUsuario = Integer.parseInt(txtIdUsuario.getText());
-            String nombrePago = txtNomPago.getText();
+            String nombrePago = txtNombrePago.getText();
             double monto = Double.parseDouble(txtMonto.getText());
             String fechaTexto = txtFPago.getText(); // Se asume formato "YYYY-MM-DD"
             String estado = txtEstado.getText();
@@ -198,9 +226,8 @@ public class Pago_Recurrente extends javax.swing.JFrame {
             // Convertir la fecha de String a java.sql.Date
             java.sql.Date fechaPago = java.sql.Date.valueOf(fechaTexto);
 
-            // Obtener la conexión desde OracleConnection
-            OracleConnection oracleConn = new OracleConnection();
-            Connection conn = (Connection) oracleConn.getConnection();
+            // Obtener conexión con Oracle
+            java.sql.Connection conn = proyecto_bd.OracleConnection.conectar();
 
             // Verificar que la conexión no sea nula
             if (conn == null) {
@@ -208,21 +235,34 @@ public class Pago_Recurrente extends javax.swing.JFrame {
                 return;
             }
 
-            // Instancia de la clase PagosRecurrentes
-            PagosRecurrentes pagos = new PagosRecurrentes((java.sql.Connection) conn);
+            // Llamar al procedimiento almacenado en Oracle
+            CallableStatement cstmt = conn.prepareCall("{CALL actualizar_pago(?, ?, ?, ?, ?, ?, ?)}");
 
-            // Llamar al método para actualizar
-            pagos.actualizarPagoRecurrente(idPago, idUsuario, nombrePago, monto, fechaPago, estado);
+            cstmt.setInt(1, idPago);
+            cstmt.setInt(2, idUsuario);
+            cstmt.setString(3, nombrePago);
+            cstmt.setDouble(4, monto);
+            cstmt.setDate(5, fechaPago);
+            cstmt.setString(6, estado);
 
-            JOptionPane.showMessageDialog(this, "Pago recurrente actualizado exitosamente.");
+            cstmt.executeUpdate();
 
+            JOptionPane.showMessageDialog(null, "Pago recurrente actualizado correctamente.");
+
+            // Cerrar conexiones
+            cstmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error: Verifica que los campos numéricos sean correctos.");
+            JOptionPane.showMessageDialog(null, "Error: Verifica que los campos numéricos sean correctos.");
         } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(this, "Error: Formato de fecha incorrecto. Usa YYYY-MM-DD.");
+            JOptionPane.showMessageDialog(null, "Error: Formato de fecha incorrecto. Usa YYYY-MM-DD.");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
         }
+    
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -256,6 +296,10 @@ public class Pago_Recurrente extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -270,16 +314,28 @@ public class Pago_Recurrente extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pago_Recurrente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pago_Recurrente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pago_Recurrente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pago_Recurrente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Pago_Recurrente.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Pago_Recurrente.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Pago_Recurrente.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Pago_Recurrente.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -294,6 +350,7 @@ public class Pago_Recurrente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnVolverMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -307,6 +364,6 @@ public class Pago_Recurrente extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdPRecurrente;
     private javax.swing.JTextField txtIdUsuario;
     private javax.swing.JTextField txtMonto;
-    private javax.swing.JTextField txtNomPago;
+    private javax.swing.JTextField txtNombrePago;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package VISTA;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,18 +12,19 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyecto_bd.OracleConnection;
 
+
 /**
  *
- * @author USUARIO
+ * @author JOSEFU
  */
-public class Control_Clientes extends javax.swing.JFrame {
+public class Impuestos extends javax.swing.JFrame {
 
     /**
-     * Creates new form Control_Clientes
+     * Creates new form Impuestos
      */
-    public Control_Clientes() {
+    public Impuestos() {
         initComponents();
-        cargarDatosClientes();
+        cargarDatosImpuestos();
     }
 
     /**
@@ -34,15 +36,18 @@ public class Control_Clientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        btnVolver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaClientes = new javax.swing.JTable();
+        tablaImpuestos = new javax.swing.JTable();
+        btnVolver1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1.setText("jLabel1");
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel2.setText("jLabel2");
 
         btnVolver.setBackground(new java.awt.Color(0, 102, 102));
         btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -54,23 +59,35 @@ public class Control_Clientes extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Clientes");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tablaClientes.setBackground(new java.awt.Color(0, 102, 102));
-        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Impuestos");
+
+        tablaImpuestos.setBackground(new java.awt.Color(0, 102, 102));
+        tablaImpuestos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID Cliente", "Nombre Cliente", "Email Cliente", "Numero Cliente"
+                "ID Impuesto", "ID Impuesto", "Monto", "Fecha Registro", "Descripcion"
             }
         ));
-        jScrollPane1.setViewportView(tablaClientes);
+        jScrollPane1.setViewportView(tablaImpuestos);
+
+        btnVolver1.setBackground(new java.awt.Color(0, 102, 102));
+        btnVolver1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnVolver1.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver1.setText("Volver");
+        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolver1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -79,52 +96,49 @@ public class Control_Clientes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(413, 413, 413)
-                        .addComponent(btnVolver)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(468, 468, 468)
+                        .addComponent(jLabel3)
+                        .addGap(0, 494, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)))
+                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1034, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(423, 423, 423)
-                .addComponent(jLabel1)
+                .addGap(474, 474, 474)
+                .addComponent(btnVolver1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(32, 32, 32)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel3)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(btnVolver)
-                .addGap(46, 46, 46))
+                .addGap(30, 30, 30)
+                .addComponent(btnVolver1)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-
-        this.dispose();
-        Menu menu = new Menu();
-        menu.setVisible(true);
-    }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void cargarDatosClientes() {
+    private void cargarDatosImpuestos() {
     try {
         // Obtener conexión a la base de datos
         Connection conn = OracleConnection.conectar();
@@ -134,27 +148,28 @@ public class Control_Clientes extends javax.swing.JFrame {
             return;
         }
 
-        // Consulta SQL para obtener los clientes
-        String query = "SELECT id_cliente, nombre_cliente, email_cliente, numero_cliente FROM clientes";
+        // Consulta SQL para obtener los impuestos
+        String query = "SELECT id_impuesto, id_usuario, monto, fecha_registro, descripcion FROM impuestos";
         PreparedStatement pst = conn.prepareStatement(query);
         ResultSet rs = pst.executeQuery();
 
-        // Modelo para la tabla
+        // Modelo de la tabla
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new String[]{"ID Cliente", "Nombre Cliente", "Email Cliente", "Número Cliente"});
+        modelo.setColumnIdentifiers(new String[]{"ID Impuesto", "ID Usuario", "Monto", "Fecha Registro", "Descripción"});
 
-        // Llenar el modelo con datos de la consulta
+        // Llenar el modelo con los datos de la consulta
         while (rs.next()) {
             modelo.addRow(new Object[]{
-                rs.getInt("id_cliente"),
-                rs.getString("nombre_cliente"),
-                rs.getString("email_cliente"),
-                rs.getString("numero_cliente")
+                rs.getInt("id_impuesto"),
+                rs.getInt("id_usuario"),
+                rs.getDouble("monto"),
+                rs.getDate("fecha_registro"),
+                rs.getString("descripcion")
             });
         }
 
         // Asignar modelo a la tabla
-        tablaClientes.setModel(modelo);
+        tablaImpuestos.setModel(modelo);
 
         // Cerrar conexiones
         rs.close();
@@ -162,10 +177,25 @@ public class Control_Clientes extends javax.swing.JFrame {
         conn.close();
 
     } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error al cargar clientes: " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Error al cargar impuestos: " + e.getMessage());
     }
 }
 
+    
+    
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+
+        this.dispose();
+        Menu menu = new Menu();
+        menu.setVisible(true);
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+
+        this.dispose();
+        Menu menu = new Menu();
+        menu.setVisible(true);
+    }//GEN-LAST:event_btnVolver1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,29 +214,32 @@ public class Control_Clientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Control_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Impuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Control_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Impuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Control_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Impuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Control_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Impuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Control_Clientes().setVisible(true);
+                new Impuestos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnVolver1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaClientes;
+    private javax.swing.JTable tablaImpuestos;
     // End of variables declaration//GEN-END:variables
 }

@@ -168,9 +168,9 @@ public class Registro extends javax.swing.JFrame {
         String nombre = txtNombre.getText();
         String email = txtEmail.getText();
         String contrasenna = new String(txtContra.getPassword());
-        String fechaTexto = txtFechaReg.getText(); // Ejemplo: "31-JAN-24"
+        String fechaTexto = txtFechaReg.getText();
 
-        // Validar el formato de la fecha con una expresión regular
+        // Validar el formato de la fecha con una expresion regular
         if (!fechaTexto.matches("\\d{2}-[a-zA-Z]{3}-\\d{2}")) {
             JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto. Usa DD-MMM-YY (Ej: 31-JAN-24)");
             return;
@@ -188,8 +188,7 @@ public class Registro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: No se pudo conectar a la base de datos.");
             return;
         }
-
-        // Consulta sin id_usuario (se autogenera)
+        
         String sql = "INSERT INTO usuarios (nombre, email, contrasenna, fecha_registro) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {

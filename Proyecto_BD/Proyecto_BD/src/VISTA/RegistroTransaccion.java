@@ -4,9 +4,11 @@
  */
 package VISTA;
 
-import CRUD.Transacciones;
-import javax.swing.JOptionPane;
 import proyecto_bd.OracleConnection;
+import java.sql.CallableStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane; // Para mostrar mensajes en la interfaz
+
 
 /**
  *
@@ -34,8 +36,7 @@ public class RegistroTransaccion extends javax.swing.JFrame {
         txtIdTransaccion = new javax.swing.JTextField();
         txtTipo = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
-        txtIdUsuario = new javax.swing.JTextField();
-        txtIdCategoria = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         txtMonto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -44,29 +45,31 @@ public class RegistroTransaccion extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        btnAgregar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
+        btnAgregarTransaccion = new javax.swing.JButton();
+        btnEliminarTransaccion = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
+        btnVolver = new javax.swing.JButton();
+        txtCategoria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
-        txtIdCategoria.addActionListener(new java.awt.event.ActionListener() {
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdCategoriaActionPerformed(evt);
+                txtUsuarioActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Transacciones");
 
-        jLabel2.setText("Id Usuario");
+        jLabel2.setText("Usuario");
 
         jLabel3.setText("Id Transaccion");
 
-        jLabel4.setText("Id Categoria");
+        jLabel4.setText("Categoria");
 
         jLabel5.setText("Monto");
 
@@ -74,90 +77,109 @@ public class RegistroTransaccion extends javax.swing.JFrame {
 
         jLabel7.setText("Descripcion");
 
-        btnAgregar.setBackground(new java.awt.Color(0, 102, 102));
-        btnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarTransaccion.setBackground(new java.awt.Color(0, 102, 102));
+        btnAgregarTransaccion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAgregarTransaccion.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarTransaccion.setText("Agregar");
+        btnAgregarTransaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnAgregarTransaccionActionPerformed(evt);
             }
         });
 
-        btnEliminar.setBackground(new java.awt.Color(0, 102, 102));
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarTransaccion.setBackground(new java.awt.Color(0, 102, 102));
+        btnEliminarTransaccion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEliminarTransaccion.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarTransaccion.setText("Eliminar");
+        btnEliminarTransaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                btnEliminarTransaccionActionPerformed(evt);
             }
         });
 
         jLabel8.setText("Fecha");
+
+        btnVolver.setBackground(new java.awt.Color(0, 102, 102));
+        btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
+        txtCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCategoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))
-                        .addGap(79, 79, 79)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtIdTransaccion, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtDescripcion)
-                                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAgregar)
-                            .addComponent(btnEliminar)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(jLabel1)))
-                .addGap(15, 15, 15))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
+                .addGap(79, 79, 79)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtIdTransaccion, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(txtUsuario)
+                    .addComponent(txtMonto)
+                    .addComponent(txtTipo)
+                    .addComponent(txtDescripcion)
+                    .addComponent(txtFecha)
+                    .addComponent(txtCategoria))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEliminarTransaccion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAgregarTransaccion, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(30, 30, 30))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(171, 171, 171))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnVolver)
+                        .addGap(204, 204, 204))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIdTransaccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregar)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnAgregarTransaccion))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar)
+                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(btnEliminarTransaccion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,83 +188,132 @@ public class RegistroTransaccion extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 370, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 406, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+    private void btnAgregarTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTransaccionActionPerformed
          try {
+    int idTransaccion = Integer.parseInt(txtIdTransaccion.getText());
+    String nombreUsuario = txtUsuario.getText(); // Obtener nombre directamente
+    String nombreCategoria = txtCategoria.getText(); // Obtener nombre de la categoría
+    double monto = Double.parseDouble(txtMonto.getText());
+    String tipo = txtTipo.getText();
+    java.sql.Date fecha = java.sql.Date.valueOf(txtFecha.getText()); // Asume formato yyyy-MM-dd
+    String descripcion = txtDescripcion.getText();
+
+    // Establecer conexión con la base de datos
+    java.sql.Connection conn = OracleConnection.conectar(); // Llamada correcta al método estático
+
+
+    // Llamar al procedimiento almacenado en Oracle
+    CallableStatement cstmt = conn.prepareCall("{CALL insertar_transaccion(?, ?, ?, ?, ?, ?, ?)}");
+
+    cstmt.setInt(1, idTransaccion); // ID de la transacción
+    cstmt.setString(2, nombreUsuario); // Nombre del usuario en lugar de ID
+    cstmt.setString(3, nombreCategoria); // Nombre de la categoría en lugar de ID
+    cstmt.setDouble(4, monto);
+    cstmt.setString(5, tipo);
+    cstmt.setDate(6, fecha);
+    cstmt.setString(7, descripcion);
+
+    cstmt.execute();
+    JOptionPane.showMessageDialog(null, "Transacción insertada exitosamente.");
+
+    // Cerrar recursos
+    cstmt.close();
+    conn.close();
+
+    // Limpiar los campos después de agregar
+    txtIdTransaccion.setText("");
+    txtUsuario.setText("");
+    txtCategoria.setText("");
+    txtMonto.setText("");
+    txtTipo.setText("");
+    txtFecha.setText("");
+    txtDescripcion.setText("");
+
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage());
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(null, "Error: Asegúrate de que los campos numéricos tienen valores correctos.");
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, "Error inesperado al agregar la transacción: " + e.getMessage());
+}
+
+                 
+    }//GEN-LAST:event_btnAgregarTransaccionActionPerformed
+
+    private void btnEliminarTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTransaccionActionPerformed
+       try {
+        // Obtener el ID de la transacción desde el campo de texto
         int idTransaccion = Integer.parseInt(txtIdTransaccion.getText());
-        int idUsuario = Integer.parseInt(txtIdUsuario.getText());
-        int idCategoria = Integer.parseInt(txtIdCategoria.getText());
-        double monto = Double.parseDouble(txtMonto.getText());
-        String tipo = txtTipo.getText();
-        java.sql.Date fecha = java.sql.Date.valueOf(txtFecha.getText());  // Asume formato yyyy-MM-dd
-        String descripcion = txtDescripcion.getText();
 
-        // Crear la transacción usando el método de la clase Transacciones
-        Transacciones transacciones = new Transacciones(new OracleConnection().getConnection()); // Aquí solo necesitas pasar la conexión
-        transacciones.crearTransaccion(idTransaccion, idUsuario, idCategoria, monto, tipo, fecha, descripcion);
+        // Establecer conexión con la base de datos
+        java.sql.Connection conn = OracleConnection.conectar(); // Llamada correcta al método estático
 
-        // Limpiar los campos después de agregar
+        // Llamar al procedimiento almacenado en Oracle
+        CallableStatement cstmt = conn.prepareCall("{CALL eliminar_transaccion(?)}");
+
+        cstmt.setInt(1, idTransaccion); // Enviar ID de la transacción al procedimiento
+
+        int filasAfectadas = cstmt.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            JOptionPane.showMessageDialog(null, "Transacción eliminada correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró una transacción con ese ID.");
+        }
+
+        // Cerrar conexiones
+        cstmt.close();
+        conn.close();
+
+        // Limpiar el campo después de eliminar
         txtIdTransaccion.setText("");
-        txtIdUsuario.setText("");
-        txtIdCategoria.setText("");
-        txtMonto.setText("");
-        txtTipo.setText("");
-        txtFecha.setText("");
-        txtDescripcion.setText("");
-        
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Error: Debes ingresar un ID válido.");
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al agregar la transacción: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Error inesperado al eliminar la transacción: " + e.getMessage());
     }
-    }//GEN-LAST:event_btnAgregarActionPerformed
+     
+    }//GEN-LAST:event_btnEliminarTransaccionActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+       
+       
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+                              
+    this.dispose();
+    Menu menu = new Menu(); 
+    menu.setVisible(true); 
+
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
-         try {
-        // Obtener el ID de la transacción que se quiere eliminar
-        int idTransaccion = Integer.parseInt(txtIdTransaccion.getText());
-        
-        // Eliminar la transacción usando el método de la clase Transacciones
-        Transacciones transacciones = new Transacciones(new OracleConnection().getConnection());
-        transacciones.eliminarTransacciones(idTransaccion);
+    }//GEN-LAST:event_txtUsuarioActionPerformed
 
-        // Limpiar los campos después de eliminar
-        txtIdTransaccion.setText("");
-        txtIdUsuario.setText("");
-        txtIdCategoria.setText("");
-        txtMonto.setText("");
-        txtTipo.setText("");
-        txtFecha.setText("");
-        txtDescripcion.setText("");
-        
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al eliminar la transacción: " + e.getMessage());
-    }
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void txtIdCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCategoriaActionPerformed
+    private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdCategoriaActionPerformed
+    }//GEN-LAST:event_txtCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,8 +351,9 @@ public class RegistroTransaccion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnAgregarTransaccion;
+    private javax.swing.JButton btnEliminarTransaccion;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -291,12 +363,12 @@ public class RegistroTransaccion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtCategoria;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtIdCategoria;
     private javax.swing.JTextField txtIdTransaccion;
-    private javax.swing.JTextField txtIdUsuario;
     private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txtTipo;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
