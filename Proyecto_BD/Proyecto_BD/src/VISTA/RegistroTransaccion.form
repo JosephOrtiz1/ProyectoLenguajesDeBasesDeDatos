@@ -217,6 +217,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Recuerda revisar el que el id este correcto"/>
+          </AccessibilityProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarTransaccionActionPerformed"/>
           </Events>

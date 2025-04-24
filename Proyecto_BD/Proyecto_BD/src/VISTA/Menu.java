@@ -28,13 +28,13 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnRTransaccion = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        btnPRecurrentes = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnRegistroTransaccion = new javax.swing.JButton();
+        btnImpuestos = new javax.swing.JButton();
+        btnPagosRecurrentes = new javax.swing.JButton();
+        btnGraficas = new javax.swing.JButton();
         btnCClientes = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
-        btnReportes1 = new javax.swing.JButton();
+        btnPresupuestos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,23 +43,28 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("MENÚ");
 
-        btnRTransaccion.setText("Registro Transaccion");
-        btnRTransaccion.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistroTransaccion.setText("Registro Transaccion");
+        btnRegistroTransaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRTransaccionActionPerformed(evt);
+                btnRegistroTransaccionActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Impuestos");
-
-        btnPRecurrentes.setText("Pagos recurrentes");
-        btnPRecurrentes.addActionListener(new java.awt.event.ActionListener() {
+        btnImpuestos.setText("Impuestos");
+        btnImpuestos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPRecurrentesActionPerformed(evt);
+                btnImpuestosActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Gráficas");
+        btnPagosRecurrentes.setText("Pagos recurrentes");
+        btnPagosRecurrentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagosRecurrentesActionPerformed(evt);
+            }
+        });
+
+        btnGraficas.setText("Gráficas");
 
         btnCClientes.setText("Control de clientes");
         btnCClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -75,10 +80,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnReportes1.setText("Presupuestos");
-        btnReportes1.addActionListener(new java.awt.event.ActionListener() {
+        btnPresupuestos.setText("Presupuestos");
+        btnPresupuestos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReportes1ActionPerformed(evt);
+                btnPresupuestosActionPerformed(evt);
             }
         });
 
@@ -89,13 +94,13 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnRTransaccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPRecurrentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRegistroTransaccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnImpuestos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPagosRecurrentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGraficas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnReportes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPresupuestos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(263, 263, 263)
@@ -108,19 +113,19 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(23, 23, 23)
-                .addComponent(btnRTransaccion)
+                .addComponent(btnRegistroTransaccion)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnImpuestos)
                 .addGap(18, 18, 18)
-                .addComponent(btnPRecurrentes)
+                .addComponent(btnPagosRecurrentes)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btnGraficas)
                 .addGap(18, 18, 18)
                 .addComponent(btnCClientes)
                 .addGap(18, 18, 18)
                 .addComponent(btnReportes)
                 .addGap(18, 18, 18)
-                .addComponent(btnReportes1)
+                .addComponent(btnPresupuestos)
                 .addContainerGap(121, Short.MAX_VALUE))
         );
 
@@ -142,30 +147,37 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRTransaccionActionPerformed
+    private void btnRegistroTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroTransaccionActionPerformed
         // TODO add your handling code here:
-        new RegistroTransaccion().setVisible(true); // Abre otro JFrame
+        new RegistroTransaccion().setVisible(true);
             this.dispose(); 
-    }//GEN-LAST:event_btnRTransaccionActionPerformed
+    }//GEN-LAST:event_btnRegistroTransaccionActionPerformed
 
     private void btnCClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCClientesActionPerformed
-        new Control_Clientes().setVisible(true); // Abre otro JFrame
+        new Control_Clientes().setVisible(true); 
             this.dispose(); 
     }//GEN-LAST:event_btnCClientesActionPerformed
 
-    private void btnPRecurrentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPRecurrentesActionPerformed
-        // TODO add your handling code here:
-        new Pago_Recurrente().setVisible(true); // Abre otro JFrame
+    private void btnPagosRecurrentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagosRecurrentesActionPerformed
+      
+        new Pago_Recurrente().setVisible(true); 
             this.dispose(); 
-    }//GEN-LAST:event_btnPRecurrentesActionPerformed
+    }//GEN-LAST:event_btnPagosRecurrentesActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        new Reportes().setVisible(true); 
+            this.dispose(); 
     }//GEN-LAST:event_btnReportesActionPerformed
 
-    private void btnReportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportes1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReportes1ActionPerformed
+    private void btnPresupuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPresupuestosActionPerformed
+        new Presupuestos().setVisible(true); 
+            this.dispose();
+    }//GEN-LAST:event_btnPresupuestosActionPerformed
+
+    private void btnImpuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImpuestosActionPerformed
+        new Impuestos().setVisible(true); 
+            this.dispose();
+    }//GEN-LAST:event_btnImpuestosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,12 +216,12 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCClientes;
-    private javax.swing.JButton btnPRecurrentes;
-    private javax.swing.JButton btnRTransaccion;
+    private javax.swing.JButton btnGraficas;
+    private javax.swing.JButton btnImpuestos;
+    private javax.swing.JButton btnPagosRecurrentes;
+    private javax.swing.JButton btnPresupuestos;
+    private javax.swing.JButton btnRegistroTransaccion;
     private javax.swing.JButton btnReportes;
-    private javax.swing.JButton btnReportes1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

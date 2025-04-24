@@ -930,11 +930,24 @@ END;
 
 
 -- Trigger para verificar que no se realicen transacciones con saldo insuficiente
-CREATE TRIGGER tr_verificarSaldoMinimo
+DROP TRIGGER tr_verificarSaldoMinimo;
+CREATE OR REPLACE NONEDITIONABLE TRIGGER tr_verificarSaldoMinimo
 BEFORE INSERT ON Transacciones
 FOR EACH ROW
+DECLARE
+    saldoActual DECIMAL(15,2);
 BEGIN
-    DECLARE saldoActual DECIMAL(15,2);
+    -- Obtener el saldo actual de la cuenta
+    SELECT saldo INTO saldoActual
+    FROM CuentasBancarias
+    WHERE idCuenta = :NEW.idCuenta;
+
+    -- Verificar que haya suficiente saldo
+    IF saldoActual - :NEW.monto < 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Saldo insuficiente para realizar la transacción');
+    END IF;
+END;
+/
     
     -- Obtener el saldo actual de la cuenta
     SELECT saldo INTO saldoActual
@@ -968,3 +981,8 @@ BEGIN
         SELECT seq_usuario_id.NEXTVAL INTO :NEW.id_usuario FROM DUAL;
     END IF;
 END;
+
+--Cambio de fecha para evitar posibles errores.
+SELECT VALUE FROM NLS_DATABASE_PARAMETERS WHERE PARAMETER = 'NLS_DATE_FORMAT';
+ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
+SELECT SYSDATE FROM DUAL;

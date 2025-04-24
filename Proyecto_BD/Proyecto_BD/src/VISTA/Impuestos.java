@@ -62,10 +62,10 @@ public class Impuestos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Impuestos");
 
-        tablaImpuestos.setBackground(new java.awt.Color(0, 102, 102));
+        tablaImpuestos.setBackground(new java.awt.Color(255, 255, 255));
         tablaImpuestos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},

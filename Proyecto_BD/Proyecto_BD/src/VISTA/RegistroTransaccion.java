@@ -4,11 +4,13 @@
  */
 package VISTA;
 
+import com.sun.jdi.connect.spi.Connection;
 import proyecto_bd.OracleConnection;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
-import javax.swing.JOptionPane; // Para mostrar mensajes en la interfaz
-
+import javax.swing.JOptionPane;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -193,6 +195,8 @@ public class RegistroTransaccion extends javax.swing.JFrame {
                 .addGap(72, 72, 72))
         );
 
+        btnEliminarTransaccion.getAccessibleContext().setAccessibleDescription("Recuerda revisar el que el id este correcto");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,102 +212,97 @@ public class RegistroTransaccion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTransaccionActionPerformed
-         try {
-    int idTransaccion = Integer.parseInt(txtIdTransaccion.getText());
-    String nombreUsuario = txtUsuario.getText(); // Obtener nombre directamente
-    String nombreCategoria = txtCategoria.getText(); // Obtener nombre de la categoría
-    double monto = Double.parseDouble(txtMonto.getText());
-    String tipo = txtTipo.getText();
-    java.sql.Date fecha = java.sql.Date.valueOf(txtFecha.getText()); // Asume formato yyyy-MM-dd
-    String descripcion = txtDescripcion.getText();
-
-    // Establecer conexión con la base de datos
-    java.sql.Connection conn = OracleConnection.conectar(); // Llamada correcta al método estático
-
-
-    // Llamar al procedimiento almacenado en Oracle
-    CallableStatement cstmt = conn.prepareCall("{CALL insertar_transaccion(?, ?, ?, ?, ?, ?, ?)}");
-
-    cstmt.setInt(1, idTransaccion); // ID de la transacción
-    cstmt.setString(2, nombreUsuario); // Nombre del usuario en lugar de ID
-    cstmt.setString(3, nombreCategoria); // Nombre de la categoría en lugar de ID
-    cstmt.setDouble(4, monto);
-    cstmt.setString(5, tipo);
-    cstmt.setDate(6, fecha);
-    cstmt.setString(7, descripcion);
-
-    cstmt.execute();
-    JOptionPane.showMessageDialog(null, "Transacción insertada exitosamente.");
-
-    // Cerrar recursos
-    cstmt.close();
-    conn.close();
-
-    // Limpiar los campos después de agregar
-    txtIdTransaccion.setText("");
-    txtUsuario.setText("");
-    txtCategoria.setText("");
-    txtMonto.setText("");
-    txtTipo.setText("");
-    txtFecha.setText("");
-    txtDescripcion.setText("");
-
-} catch (SQLException e) {
-    JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage());
-} catch (NumberFormatException e) {
-    JOptionPane.showMessageDialog(null, "Error: Asegúrate de que los campos numéricos tienen valores correctos.");
-} catch (Exception e) {
-    JOptionPane.showMessageDialog(null, "Error inesperado al agregar la transacción: " + e.getMessage());
-}
-
-                 
-    }//GEN-LAST:event_btnAgregarTransaccionActionPerformed
-
-    private void btnEliminarTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTransaccionActionPerformed
-       try {
-        // Obtener el ID de la transacción desde el campo de texto
+try {
         int idTransaccion = Integer.parseInt(txtIdTransaccion.getText());
+        String nombreUsuario = txtUsuario.getText();
+        String nombreCategoria = txtCategoria.getText();
+        double monto = Double.parseDouble(txtMonto.getText());
+        String tipo = txtTipo.getText();
 
-        // Establecer conexión con la base de datos
-        java.sql.Connection conn = OracleConnection.conectar(); // Llamada correcta al método estático
+        String fechaTexto = txtFecha.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        sdf.setLenient(false); 
+        Date utilDate = sdf.parse(fechaTexto);
+        java.sql.Date fecha = new java.sql.Date(utilDate.getTime());
 
-        // Llamar al procedimiento almacenado en Oracle
-        CallableStatement cstmt = conn.prepareCall("{CALL eliminar_transaccion(?)}");
+        String descripcion = txtDescripcion.getText();
 
-        cstmt.setInt(1, idTransaccion); // Enviar ID de la transacción al procedimiento
+        java.sql.Connection conn = OracleConnection.conectar();
+        CallableStatement cstmt = conn.prepareCall("{CALL insertar_transaccion(?, ?, ?, ?, ?, ?, ?)}");
 
-        int filasAfectadas = cstmt.executeUpdate();
+        cstmt.setInt(1, idTransaccion);
+        cstmt.setString(2, nombreUsuario);
+        cstmt.setString(3, nombreCategoria);
+        cstmt.setDouble(4, monto);
+        cstmt.setString(5, tipo);
+        cstmt.setDate(6, fecha);
+        cstmt.setString(7, descripcion);
 
-        if (filasAfectadas > 0) {
-            JOptionPane.showMessageDialog(null, "Transacción eliminada correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró una transacción con ese ID.");
-        }
+        cstmt.execute();
+        JOptionPane.showMessageDialog(null, "Transacción insertada exitosamente.");
 
-        // Cerrar conexiones
         cstmt.close();
         conn.close();
 
-        // Limpiar el campo después de eliminar
+        // Limpiar campos
         txtIdTransaccion.setText("");
+        txtUsuario.setText("");
+        txtCategoria.setText("");
+        txtMonto.setText("");
+        txtTipo.setText("");
+        txtFecha.setText("");
+        txtDescripcion.setText("");
 
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage());
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Error: Debes ingresar un ID válido.");
+        JOptionPane.showMessageDialog(null, "Error: Asegúrate de que los campos numéricos tienen valores correctos.");
+    } catch (java.text.ParseException e) {
+        JOptionPane.showMessageDialog(null, "Formato de fecha inválido. Usa el formato MM-dd-yyyy (por ejemplo, 04-23-2025).");
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error inesperado al eliminar la transacción: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Error inesperado al agregar la transacción: " + e.getMessage());
     }
-     
+    }//GEN-LAST:event_btnAgregarTransaccionActionPerformed
+
+    private void btnEliminarTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTransaccionActionPerformed
+        try {
+            int idTransaccion = Integer.parseInt(txtIdTransaccion.getText());
+
+            java.sql.Connection conn = OracleConnection.conectar();
+           
+            CallableStatement cstmt = conn.prepareCall("{CALL eliminar_transaccion(?)}");
+
+            cstmt.setInt(1, idTransaccion);
+
+            int filasAfectadas = cstmt.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Transacción eliminada correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró una transacción con ese ID.");
+            }
+
+            cstmt.close();
+            conn.close();
+
+            txtIdTransaccion.setText("");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error: Debes ingresar un ID válido.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error inesperado al eliminar la transacción: " + e.getMessage());
+        }
+
     }//GEN-LAST:event_btnEliminarTransaccionActionPerformed
 
-       
-       
+
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-                              
-    this.dispose();
-    Menu menu = new Menu(); 
-    menu.setVisible(true); 
+
+        this.dispose();
+        Menu menu = new Menu();
+        menu.setVisible(true);
 
     }//GEN-LAST:event_btnVolverActionPerformed
 

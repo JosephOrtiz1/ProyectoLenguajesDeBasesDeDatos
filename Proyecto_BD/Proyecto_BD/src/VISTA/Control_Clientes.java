@@ -58,7 +58,7 @@ public class Control_Clientes extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Clientes");
 
-        tablaClientes.setBackground(new java.awt.Color(0, 102, 102));
+        tablaClientes.setBackground(new java.awt.Color(255, 255, 255));
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

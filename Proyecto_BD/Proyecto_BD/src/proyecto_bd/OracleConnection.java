@@ -30,7 +30,7 @@ public class OracleConnection {
             return conn;
         } catch (Exception e) {
             System.out.println("Error al conectar: " + e.getMessage());
-            return null;  // Si la conexión falla, retorna null
+            return null;  
         }
     }
     

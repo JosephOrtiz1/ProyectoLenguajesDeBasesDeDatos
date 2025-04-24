@@ -52,13 +52,13 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnRTransaccion" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnPRecurrentes" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnRegistroTransaccion" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnImpuestos" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnPagosRecurrentes" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnGraficas" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnCClientes" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnReportes" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnReportes1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnPresupuestos" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -75,19 +75,19 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  <Component id="btnRTransaccion" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRegistroTransaccion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnImpuestos" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnPRecurrentes" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPagosRecurrentes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnGraficas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnCClientes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnReportes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnReportes1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPresupuestos" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="121" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -102,28 +102,31 @@
             <Property name="text" type="java.lang.String" value="MEN&#xda;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRTransaccion">
+        <Component class="javax.swing.JButton" name="btnRegistroTransaccion">
           <Properties>
             <Property name="text" type="java.lang.String" value="Registro Transaccion"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRTransaccionActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistroTransaccionActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btnImpuestos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Impuestos"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImpuestosActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnPRecurrentes">
+        <Component class="javax.swing.JButton" name="btnPagosRecurrentes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pagos recurrentes"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPRecurrentesActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPagosRecurrentesActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="btnGraficas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Gr&#xe1;ficas"/>
           </Properties>
@@ -144,12 +147,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportesActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnReportes1">
+        <Component class="javax.swing.JButton" name="btnPresupuestos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Presupuestos"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReportes1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPresupuestosActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

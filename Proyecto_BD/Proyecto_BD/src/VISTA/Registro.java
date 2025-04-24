@@ -4,19 +4,12 @@
  */
 package VISTA;
 
-import com.sun.jdi.connect.spi.Connection;
-import proyecto_bd.OracleConnection;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import proyecto_bd.OracleConnection;
-
 
 /**
  *
@@ -162,55 +155,53 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
- 
+
         try {
-        // Obtener los valores de los campos de texto
-        String nombre = txtNombre.getText();
-        String email = txtEmail.getText();
-        String contrasenna = new String(txtContra.getPassword());
-        String fechaTexto = txtFechaReg.getText();
+            // Obtener los valores de los campos de texto
+            String nombre = txtNombre.getText();
+            String email = txtEmail.getText();
+            String contrasenna = new String(txtContra.getPassword());
+            String fechaTexto = txtFechaReg.getText();
 
-        // Validar el formato de la fecha con una expresion regular
-        if (!fechaTexto.matches("\\d{2}-[a-zA-Z]{3}-\\d{2}")) {
-            JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto. Usa DD-MMM-YY (Ej: 31-JAN-24)");
-            return;
+            // Validar el formato de la fecha con una expresion regular
+            if (!fechaTexto.matches("\\d{2}-\\d{2}-\\d{4}")) {
+                JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto. Usa DD-MM-YYYY (Ej: 31-01-2024)");
+                return;
+            }
+
+            SimpleDateFormat formatoOracle = new SimpleDateFormat("dd-MM-yyyy");
+            Date fechaUtil = formatoOracle.parse(fechaTexto);
+            java.sql.Date fechaRegistro = new java.sql.Date(fechaUtil.getTime());
+
+            java.sql.Connection conn = proyecto_bd.OracleConnection.conectar();
+
+            if (conn == null) {
+                JOptionPane.showMessageDialog(this, "Error: No se pudo conectar a la base de datos.");
+                return;
+            }
+
+            String sql = "INSERT INTO usuarios (nombre, email, contrasenna, fecha_registro) VALUES (?, ?, ?, ?)";
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, nombre);
+                ps.setString(2, email);
+                ps.setString(3, contrasenna);
+                ps.setDate(4, fechaRegistro);
+
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.");
+            }
+
+            // Cerrar conexión después de registrar
+            conn.close();
+
+        } catch (java.text.ParseException e) {
+            JOptionPane.showMessageDialog(this, "Error al convertir la fecha: " + e.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al registrar usuario: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
         }
-
-        // Convertir la fecha de texto a java.sql.Date
-        SimpleDateFormat formatoOracle = new SimpleDateFormat("dd-MMM-yy", Locale.ENGLISH);
-        Date fechaUtil = formatoOracle.parse(fechaTexto);
-        java.sql.Date fechaRegistro = new java.sql.Date(fechaUtil.getTime());
-
-        // Obtener conexión válida desde OracleConnection
-        java.sql.Connection conn = proyecto_bd.OracleConnection.conectar();
-
-        if (conn == null) {
-            JOptionPane.showMessageDialog(this, "Error: No se pudo conectar a la base de datos.");
-            return;
-        }
-        
-        String sql = "INSERT INTO usuarios (nombre, email, contrasenna, fecha_registro) VALUES (?, ?, ?, ?)";
-
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, nombre);
-            ps.setString(2, email);
-            ps.setString(3, contrasenna);
-            ps.setDate(4, fechaRegistro);
-
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Usuario registrado exitosamente.");
-        }
-
-        // Cerrar conexión después de registrar
-        conn.close();
-
-    } catch (java.text.ParseException e) {
-        JOptionPane.showMessageDialog(this, "Error al convertir la fecha: " + e.getMessage());
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error al registrar usuario: " + e.getMessage());
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
-    }
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
