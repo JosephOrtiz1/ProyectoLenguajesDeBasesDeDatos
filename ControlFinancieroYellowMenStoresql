@@ -168,3 +168,46 @@ INSERT INTO TiposCuenta (nombre) VALUES ('Corriente');
 -- Insertando una cuenta bancaria de ejemplo
 INSERT INTO CuentasBancarias (idUsuario, tipoCuenta, saldo, fechaCreacion) 
 VALUES (1, 1, 5000.00, '2025-04-20');
+
+--Procedimiento
+CREATE OR REPLACE PROCEDURE sp_registrar_impuesto(
+    p_usuario_id IN NUMBER,
+    p_monto IN NUMBER,
+    p_descripcion IN VARCHAR2
+)
+IS
+BEGIN
+    INSERT INTO Impuestos (id_usuario, monto, fecha_registro, descripcion)
+    VALUES (p_usuario_id, p_monto, SYSDATE, p_descripcion);
+    
+    COMMIT;
+END;
+
+
+CREATE OR REPLACE PROCEDURE sp_actualizar_saldo(
+    p_id_cuenta IN NUMBER,
+    p_nuevo_saldo IN NUMBER
+)
+IS
+BEGIN
+    UPDATE CuentasBancarias
+    SET saldo = p_nuevo_saldo
+    WHERE idCuenta = p_id_cuenta;
+    
+    COMMIT;
+END;
+
+
+CREATE OR REPLACE PROCEDURE sp_registrar_pago_recurrente(
+    p_usuario_id IN NUMBER,
+    p_monto IN NUMBER,
+    p_frecuencia IN VARCHAR2,
+    p_fecha_inicio IN DATE
+)
+IS
+BEGIN
+    INSERT INTO PagosRecurrentes (id_usuario, monto, frecuencia, estado, fecha_inicio)
+    VALUES (p_usuario_id, p_monto, p_frecuencia, 'Pendiente', p_fecha_inicio);
+    COMMIT;
+END;
+

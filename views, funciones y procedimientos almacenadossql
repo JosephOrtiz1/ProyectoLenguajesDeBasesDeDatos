@@ -982,7 +982,137 @@ BEGIN
     END IF;
 END;
 
+
+
+--CURSORES
+
 --Cambio de fecha para evitar posibles errores.
 SELECT VALUE FROM NLS_DATABASE_PARAMETERS WHERE PARAMETER = 'NLS_DATE_FORMAT';
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY';
 SELECT SYSDATE FROM DUAL;
+
+
+
+CREATE OR REPLACE PROCEDURE sp_listar_transacciones_altas(
+    p_monto_minimo IN NUMBER
+)
+IS
+    CURSOR cur_transacciones IS
+        SELECT id_transaccion, monto, descripcion, fecha
+        FROM Transacciones
+        WHERE monto > p_monto_minimo;
+
+BEGIN
+    FOR trans IN cur_transacciones LOOP
+        DBMS_OUTPUT.PUT_LINE('ID: ' || trans.id_transaccion || 
+                             ' | Monto: ' || trans.monto ||
+                             ' | Descripción: ' || trans.descripcion ||
+                             ' | Fecha: ' || trans.fecha);
+    END LOOP;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE sp_listar_usuarios_deuda
+IS
+    CURSOR cur_deudas IS
+        SELECT u.nombre, SUM(t.monto) total_deuda
+        FROM Usuarios u
+        JOIN Transacciones t ON u.id_usuario = t.id_usuario
+        WHERE t.tipo = 'egreso'
+        GROUP BY u.nombre
+        HAVING SUM(t.monto) > 1000; -- Ejemplo
+
+BEGIN
+    FOR rec IN cur_deudas LOOP
+        DBMS_OUTPUT.PUT_LINE('Usuario: ' || rec.nombre || 
+                             ' | Total deuda: ' || rec.total_deuda);
+    END LOOP;
+END;
+
+
+
+--FUNCIONES
+CREATE OR REPLACE FUNCTION fn_contar_transacciones_categoria(
+    p_categoria_id IN NUMBER
+) RETURN NUMBER IS
+    v_total NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_total
+    FROM Transacciones
+    WHERE id_categoria = p_categoria_id;
+    RETURN v_total;
+END;
+
+
+CREATE OR REPLACE FUNCTION fn_tiene_pagos_pendientes(
+    p_usuario_id IN NUMBER
+) RETURN VARCHAR2 IS
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_count
+    FROM PagosRecurrentes
+    WHERE id_usuario = p_usuario_id
+    AND estado = 'Pendiente';
+
+    RETURN CASE WHEN v_count > 0 THEN 'Sí' ELSE 'No' END;
+END;
+
+
+--Cursor
+CREATE OR REPLACE PROCEDURE sp_clientes_multicuentas IS
+    CURSOR cur_clientes IS
+        SELECT c.nombre, COUNT(cb.idCuenta) AS total_cuentas
+        FROM Clientes c
+        JOIN CuentasBancarias cb ON c.idCliente = cb.idCliente
+        GROUP BY c.nombre
+        HAVING COUNT(cb.idCuenta) > 3;
+BEGIN
+    FOR reg IN cur_clientes LOOP
+        DBMS_OUTPUT.PUT_LINE('Cliente: ' || reg.nombre || ' | Total cuentas: ' || reg.total_cuentas);
+    END LOOP;
+END;
+
+
+CREATE OR REPLACE PROCEDURE sp_presupuestos_altos IS
+    v_promedio NUMBER;
+    CURSOR cur_presupuestos IS
+        SELECT descripcion, monto FROM Presupuestos
+        WHERE monto > v_promedio;
+BEGIN
+    SELECT AVG(monto) INTO v_promedio FROM Presupuestos;
+
+    FOR p IN cur_presupuestos LOOP
+        DBMS_OUTPUT.PUT_LINE('Presupuesto: ' || p.descripcion || ' | Monto: ' || p.monto);
+    END LOOP;
+END;
+
+
+--funiones
+CREATE OR REPLACE FUNCTION fn_total_ingresos_usuario(
+    p_id_usuario IN NUMBER
+) RETURN NUMBER IS
+    v_total NUMBER;
+BEGIN
+    SELECT NVL(SUM(monto), 0)
+    INTO v_total
+    FROM Transacciones
+    WHERE tipo = 'ingreso' AND id_usuario = p_id_usuario;
+    RETURN v_total;
+END;
+
+
+CREATE OR REPLACE FUNCTION fn_saldo_neto_usuario(
+    p_id_usuario IN NUMBER
+) RETURN NUMBER IS
+    v_ingresos NUMBER;
+    v_egresos NUMBER;
+BEGIN
+    SELECT NVL(SUM(monto), 0) INTO v_ingresos
+    FROM Transacciones WHERE tipo = 'ingreso' AND id_usuario = p_id_usuario;
+
+    SELECT NVL(SUM(monto), 0) INTO v_egresos
+    FROM Transacciones WHERE tipo = 'egreso' AND id_usuario = p_id_usuario;
+
+    RETURN v_ingresos - v_egresos;
+END;
